@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas播放视频</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            text-align: center;
+        }
+        #box{
+            padding: 50px;
+            width: 850px;
+            height: 300px;
+            margin: 20px auto;
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+        #vdo,#can{
+            float: left;
+        }
+        #vdo{
+            margin-right: 50px;
+            /*修复尺寸*/
+            width: 400px;
+            height: auto;
+            max-height: 100%;
+            /*修复白边*/
+            display: block;
+            font-size: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <video id="vdo" src="movie.mp4"></video>
+        <canvas id="can"></canvas>
+</div>
+<script>
+    var oCan = document.getElementById("can");
+    var oVideo = document.getElementById("vdo");
+    oCan.width = 400;
+    oCan.height = 300;
+    if(oCan.getContext("2d")){
+        var cxt = oCan.getContext("2d");
+        oVideo.play();
+        //        把video获取到的景象移交给画布
+        setInterval(function () {
+            cxt.clearRect(0,0,400,300);
+            cxt.drawImage(oVideo,0,0,400,300);
+        },1);
+    }
+</script>
+</body>
+</html>

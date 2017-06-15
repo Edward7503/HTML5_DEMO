@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>本地存储实现不同页面数据通信</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: chocolate;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+    (function(){
+        var box = document.querySelector("#box");
+        var x = 0, y = 0;
+        box.onmousedown=function(ev){
+            ev = event || window.event;
+            x = ev.clientX;
+            y = ev.clientY;
+
+            document.onmousemove = function(ev){
+                ev = event || window.event;
+                var X = ev.clientX - box.clientWidth / 2;
+                var Y = ev.clientY - box.clientHeight / 2;
+                box.style.left = X + 'px';
+                box.style.top = Y + 'px';
+
+
+                localStorage.setItem("posX",X);
+                localStorage.setItem("posY",Y);
+            };
+
+            document.onmouseup = function(){
+                document.onmousemove = null;
+            }
+        };
+
+        window.onload = function(){
+            box.style.left = localStorage.getItem('posX') + 'px';
+            box.style.top =  localStorage.getItem('posY') + 'px';
+        }
+    })()
+</script>
+</body>
+</html>

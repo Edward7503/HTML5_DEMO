@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #data{
+            width: 200px;
+            height: 150px;
+            border: 1px solid #cccccc;
+        }
+    </style>
+</head>
+<body>
+<div id="data"></div>
+<script>
+    var posX = localStorage.getItem("posX");
+    var posY = localStorage.getItem("posY");
+    var data = document.querySelector("#data");
+    data.innerHTML = 'posX='+ posX + ", posY="+posY;
+</script>
+</body>
+</html>

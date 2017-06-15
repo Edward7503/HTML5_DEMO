@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>画布</title>
+</head>
+<body>
+<canvas id="canvas">浏览器不支持</canvas>
+<script>
+    (function(){
+        var cvs = document.querySelector("#canvas");
+        cvs.width = 1350;
+        cvs.height = 500;
+        cvs.style.background = '#808080';
+        var ctx = cvs.getContext('2d');
+        var x0 = 0, y0 = 0, x1 = 0, y1 = 0;
+
+        cvs.onmousedown = function(ev){
+            ev = event || window.event;
+            x0 = ev.clientX;
+            y0 = ev.clientY;
+
+            ctx.moveTo(x0,y0);
+
+            document.onmousemove = function(ev){
+                x1 = ev.clientX;
+                y1 = ev.clientY;
+                ctx.lineTo(x1,y1);
+                ctx.stroke();
+            };
+
+            document.onmouseup = function(){
+                document.onmousemove = null;
+            }
+        }
+    })()
+</script>
+</body>
+</html>

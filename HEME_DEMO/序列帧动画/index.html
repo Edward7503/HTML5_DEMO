@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>序列帧动画</title>
+</head>
+<body>
+<canvas id="canvas">
+    您的浏览器太low了
+</canvas>
+<script>
+    (function(){
+        var cvs = document.querySelector("#canvas");
+        var ctx = cvs.getContext('2d');
+        cvs.width = 800;
+        cvs.height = 500;
+        cvs.style.border = '1px solid #c0c0c0';
+
+        var img = new Image();
+        var frameX = 0;
+        var frameY = 0;
+        var frameW = 670 / 5;
+        var frameH = 447 / 3;
+        img.src = 'img/frameImg.jpg';
+        img.onload = function(){
+            setInterval(function(){
+                ctx.drawImage(
+                        img,
+                        frameW *　frameX,  // 截取的x 位置
+                        frameH *　frameY,  // 截取的y 位置
+                        frameW,            // 截取 width
+                        frameH,            // 截取 height
+                        cvs.width/2-frameW/2,               // 放置的x 位置
+                        cvs.height/2-frameH/2,               // 放置的y 位置
+                        frameW,            // 显示的图片宽
+                        frameH             // 显示的图片高
+                );
+
+                frameX++;
+                if(frameX%5==0){
+                    frameX=0;
+                    frameY++;
+                }
+                if(frameX%5==0 && frameY%3==0){
+                    frameX = 0;
+                    frameY = 0;
+                }
+            },1000/10);
+        };
+    })()
+</script>
+</body>
+</html>
